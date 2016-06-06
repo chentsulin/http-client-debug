@@ -1,6 +1,6 @@
 {
   "name": "http-client-debug",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "debug utils for http-client",
   "license": "MIT",
   "repository": "chentsulin/http-client-debug",
