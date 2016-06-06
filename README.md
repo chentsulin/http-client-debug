@@ -20,7 +20,6 @@ $ npm install http-client-debug
 ```js
 import { createStack } from 'http-client';
 
-
 const middlewares = [
   header('X-Auth-Key', key),
   header('X-Auth-Email', email),
@@ -36,6 +35,28 @@ if (process.env.NODE_ENV === 'development') {
 const stack = createStack(...middlewares);
 
 // Get "response": ....
+```
+
+or use a `path` to log property from response:
+
+```js
+import { createStack } from 'http-client';
+
+const middlewares = [
+  header('X-Auth-Key', key),
+  header('X-Auth-Email', email),
+  base('https://api.cloudflare.com/client/v4'),
+  parseJSON(),
+];
+
+if (process.env.NODE_ENV === 'development') {
+  const { log } = require('http-client-debug');
+  middlewares.push(log('jsonData.user.name'));
+}
+
+const stack = createStack(...middlewares);
+
+// Get "response.jsonData.user.name": Peter
 ```
 
 
