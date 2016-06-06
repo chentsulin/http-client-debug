@@ -19,15 +19,21 @@ $ npm install http-client-debug
 
 ```js
 import { createStack } from 'http-client';
-import { log } from 'http-client-debug';
 
-const stack = createStack(
-  header('X-Auth-Key', key),
+
+const middlewares = [
+	header('X-Auth-Key', key),
   header('X-Auth-Email', email),
   base('https://api.cloudflare.com/client/v4'),
   parseJSON(),
-  log()
-);
+];
+
+if (process.env.NODE_ENV === 'development') {
+  const { log } = require('http-client-debug');
+  middlewares.push(log());
+}
+
+const stack = createStack(...middlewares);
 
 // Get "response": ....
 ```
