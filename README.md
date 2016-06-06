@@ -22,7 +22,7 @@ import { createStack } from 'http-client';
 
 
 const middlewares = [
-	header('X-Auth-Key', key),
+  header('X-Auth-Key', key),
   header('X-Auth-Email', email),
   base('https://api.cloudflare.com/client/v4'),
   parseJSON(),
